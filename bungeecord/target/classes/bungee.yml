@@ -1,0 +1,6 @@
+name: AquixParty-BungeeCord
+version: '1.0'
+main: dev.m7wq.bungeecord.Plugin
+author: m7wq
+commands:
+  party:

@@ -1,0 +1,6 @@
+name: AquixParty-Spigot
+version: '1.0'
+main: dev.m7wq.spigot.Plugin
+api-version: '1.13'
+authors: [m7wq]
+softdepends: [BedWars1058]
