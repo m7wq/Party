@@ -75,16 +75,16 @@ public class PartyCommand extends Command implements TabExecutor {
                 break;
             case "invite":
                 if (args.length < 2) {
-                    TextHelper.sendMessage(player, "&cUsage: /party invite <player>");
+                    TextHelper.sendMessage(player,"&cUsage: /party invite <player>");
                     return;
                 }
                 ProxiedPlayer target = ProxyServer.getInstance().getPlayer(args[1]);
                 if (target == null) {
-                    TextHelper.sendMessage(player, "&cPlayer not found!");
+                    TextHelper.sendMessage(player,"&cPlayer not found!");
                     return;
                 }
                 if (target.equals(player)) {
-                    TextHelper.sendMessage(player, "&cYou can't invite yourself!");
+                    TextHelper.sendMessage(player,"&cYou can't invite yourself!");
                     return;
                 }
                 manager.invite(player, target, audiences.player(target));
@@ -93,11 +93,9 @@ public class PartyCommand extends Command implements TabExecutor {
             case "list":
                 manager.list(player);
                 break;
-
             case "disband":
                 manager.disband(player);
                 break;
-
             case "accept":
                 if (args.length < 2) {
                     TextHelper.sendMessage(player, "&cUsage: /party accept <player>");
@@ -112,7 +110,7 @@ public class PartyCommand extends Command implements TabExecutor {
                 break;
 
             case "chat":
-                if (args.length < 2) {
+                if (args.length< 2) {
                     TextHelper.sendMessage(player, "&cUsage: /party chat <message>");
                     return;
                 }
@@ -160,6 +158,7 @@ public class PartyCommand extends Command implements TabExecutor {
 
     @Override
     public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
+        
         List<String> subcommands = Arrays.asList(
                 "help", "invite", "list", "disband",
                 "accept", "chat", "promote", "demote",
@@ -167,17 +166,16 @@ public class PartyCommand extends Command implements TabExecutor {
         );
 
         if (args.length == 1) {
-            // Suggest subcommands
             return subcommands.stream()
                     .filter(s -> s.startsWith(args[0].toLowerCase()))
                     .collect(Collectors.toList());
         }
 
-        // For subcommands that need a player name
-        if (args.length == 2 && Arrays.asList("invite", "accept", "promote", "demote", "kick").contains(args[0].toLowerCase())) {
+
+        if (args.length==2 && Arrays.asList("invite","accept","promote","demote","kick").contains(args[0].toLowerCase())) {
             return ProxyServer.getInstance().getPlayers().stream()
                     .map(ProxiedPlayer::getName)
-                    .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
+                    .filter(name->name.toLowerCase().startsWith(args[1].toLowerCase()))
                     .collect(Collectors.toList());
         }
 
@@ -203,3 +201,4 @@ public class PartyCommand extends Command implements TabExecutor {
         TextHelper.sendMessage(player, "&8&m--------------------");
     }
 }
+
